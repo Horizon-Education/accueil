@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Education - Révolutionnez l'Apprentissage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        :root {
+            --primary-blue: #00aaff;
+            --dark-blue: #0077cc;
+            --light-blue: #e6f7ff;
+            --orange: #ff8c00;
+            --dark-orange: #e67e00;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --gray: #666666;
+            --dark-gray: #333333;
+            --shadow: 0 8px 25px rgba(0,0,0,0.15);
+            --shadow-light: 0 4px 12px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, var(--primary-blue) 0%, var(--orange) 100%);
+            --success-green: #27ae60;
+            --warning-orange: #f39c12;
+            --whatsapp-green: #25D366;
+            --phone-blue: #0077cc;
+            --email-red: #EA4335;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        /* Header et Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Sections Générales */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Comfortaa', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Hero Section avec Carrousel */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform: scale(1.1);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+        }
+
+        .carousel-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            z-index: 2;
+        }
+
+        .slide-content {
+            max-width: 800px;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease 0.5s;
+        }
+
+        .carousel-slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero h1 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 3;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: var(--white);
+            transform: scale(1.2);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .carousel-prev {
+            left: 20px;
+        }
+
+        .carousel-next {
+            right: 20px;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--light-gray);
+            padding-top: 150px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+            font-family: 'Comfortaa', cursive;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 80px 80px 0 0;
+            border-color: var(--primary-blue) transparent transparent transparent;
+            opacity: 0.1;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-blue);
+        }
+
+        .product-card:hover::before {
+            border-width: 100px 100px 0 0;
+            opacity: 0.15;
+        }
+
+        .product-card.featured {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .product-card.featured::before {
+            border-color: rgba(255,255,255,0.3) transparent transparent transparent;
+        }
+
+        .product-card.featured .product-icon {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .product-icon {
+            width: 90px;
+            height: 90px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-icon {
+            transform: scale(1.1);
+        }
+
+        .product-card.featured .product-icon {
+            color: white;
+        }
+
+        .product-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-family: 'Comfortaa', cursive;
+        }
+
+        .product-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .product-card.featured p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .product-status {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-available {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .status-development {
+            background: var(--warning-orange);
+            color: white;
+        }
+
+        .product-features {
+            text-align: left;
+            margin: 2rem 0;
+            color: var(--gray);
+        }
+
+        .product-card.featured .product-features {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .product-features li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .product-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .product-card.featured .product-features li:before {
+            color: white;
+        }
+
+        .integration-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--light-gray);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'Comfortaa', cursive;
+        }
+
+        /* Support Section */
+        .support-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .support-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .support-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Marketing Section */
+        .marketing {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .marketing h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Comfortaa', cursive;
+        }
+
+        .marketing p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links h4,
+        .footer-social h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+            font-family: 'Comfortaa', cursive;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Floating Contact Buttons */
+        .floating-contact {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 998;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .contact-btn:hover::before {
+            opacity: 1;
+        }
+
+        .contact-btn.whatsapp {
+            background: var(--whatsapp-green);
+        }
+
+        .contact-btn.phone {
+            background: var(--phone-blue);
+        }
+
+        .contact-btn.email {
+            background: var(--email-red);
+        }
+
+        .contact-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--dark-gray);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .contact-btn:hover .contact-tooltip {
+            opacity: 1;
+            right: 75px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about {
+                padding-top: 120px;
+                margin-top: -20px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .carousel-prev {
+                left: 10px;
+            }
+
+            .carousel-next {
+                right: 10px;
+            }
+
+            .floating-contact {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .contact-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="Horizon Education">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#accueil" class="active">Accueil</a></li>
+                    <li><a href="#apropos">À Propos</a></li>
+                    <li><a href="#produits">Produits</a></li>
+                    <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+                    <li><a href="#support">Support</a></li>
+                    <li><a href="#marketing">Marketing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section avec Carrousel -->
+    <section id="accueil" class="hero">
+        <div class="carousel">
+            <!-- Slide 1 -->
+            <div class="carousel-slide active" style="background-image: url('accueil_1.png');">
+                <div class="carousel-content">
+                    <div class="slide-content">
+                        <h1>Révolutionnez l'Apprentissage avec Horizon Class</h1>
+                        <p>La plateforme éducative intelligente qui s'adapte à chaque apprenant, partout en République du Congo et au-delà</p>
+                        <a href="#produits" class="cta-button">Découvrir Horizon Class</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="carousel-slide" style="background-image: url('accueil_2.png');">
+                <div class="carousel-content">
+                    <div class="slide-content">
+                        <h1>Éducation Personnalisée pour Tous</h1>
+                        <p>Des parcours d'apprentissage adaptés à chaque niveau, avec un suivi individualisé et des ressources enrichies</p>
+                        <a href="#produits" class="cta-button">Explorer nos Solutions</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="carousel-slide" style="background-image: url('accueil_3.png');">
+                <div class="carousel-content">
+                    <div class="slide-content">
+                        <h1>Innovation Technologique au Service de l'Éducation</h1>
+                        <p>Laboratoires VR, bibliothèques virtuelles et intelligence artificielle pour transformer l'expérience d'apprentissage</p>
+                        <a href="#produits" class="cta-button">Voir nos Innovations</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="carousel-slide" style="background-image: url('accueil_4.png');">
+                <div class="carousel-content">
+                    <div class="slide-content">
+                        <h1>Communauté d'Apprentissage Dynamique</h1>
+                        <p>Rejoignez des milliers d'apprenants et d'éducateurs passionnés pour échanger et progresser ensemble</p>
+                        <a href="#produits" class="cta-button">Rejoindre la Communauté</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="carousel-slide" style="background-image: url('accueil_5.png');">
+                <div class="carousel-content">
+                    <div class="slide-content">
+                        <h1>L'Avenir de l'Éducation Commence Ici</h1>
+                        <p>Des solutions complètes pour les établissements scolaires, les enseignants et les apprenants de tous âges</p>
+                        <a href="#produits" class="cta-button">Commencer Maintenant</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation du carrousel -->
+        <button class="carousel-nav carousel-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-nav carousel-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Indicateurs -->
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-slide="0"></div>
+            <div class="carousel-indicator" data-slide="1"></div>
+            <div class="carousel-indicator" data-slide="2"></div>
+            <div class="carousel-indicator" data-slide="3"></div>
+            <div class="carousel-indicator" data-slide="4"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="about">
+        <div class="container">
+            <h2 class="section-title">À Propos d'Horizon Education</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Notre Mission : Éduquer, Innover, Transformer</h3>
+                    <p>Horizon Education est bien plus qu'une entreprise technologique. Nous sommes un mouvement dédié à la transformation de l'éducation en Afrique et dans le monde.</p>
+                    <p>Fondée en République du Congo, notre vision est de rendre l'éducation de qualité accessible à tous, grâce à des solutions technologiques innovantes et adaptées aux réalités locales.</p>
+                    <p>Nous croyons en un avenir où chaque enfant, chaque étudiant, chaque adulte en formation peut accéder à des ressources éducatives exceptionnelles, quel que soit son lieu de résidence ou sa situation économique.</p>
+                </div>
+                <div class="about-image">
+                    <img src="accueil_1.png" alt="Équipe Horizon Education">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="produits" class="products">
+        <div class="container">
+            <h2 class="section-title">Nos Solutions Innovantes</h2>
+            <div class="products-grid">
+                <!-- Horizon Class -->
+                <div class="product-card featured">
+                    <div class="product-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <span class="product-status status-available">Disponible</span>
+                    <h3>Horizon Class</h3>
+                    <p>Plateforme éducative complète avec suivi personnalisé, ressources adaptatives et écosystème d'apprentissage collaboratif.</p>
+                    <ul class="product-features">
+                        <li>Cours personnalisés selon le niveau</li>
+                        <li>Suivi détaillé de la progression</li>
+                        <li>Communauté d'apprentissage interactive</li>
+                        <li>Analytics et rapports avancés</li>
+                        <li>Ressources multimédias enrichies</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="background: rgba(255,255,255,0.2);">Télécharger Maintenant</a>
+                </div>
+
+                <!-- Laboratoire VR -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <span class="product-status status-development">En Développement</span>
+                    <h3>Laboratoire VR</h3>
+                    <p>Expériences d'apprentissage immersives par réalité virtuelle pour révolutionner l'enseignement scientifique.</p>
+                    <ul class="product-features">
+                        <li>Simulations scientifiques réalistes</li>
+                        <li>Expériences de chimie et physique</li>
+                        <li>Visites virtuelles de laboratoires</li>
+                        <li>Manipulations interactives 3D</li>
+                        <li>Environnements sécurisés</li>
+                    </ul>
+                </div>
+
+                <!-- Bibliothèque Virtuelle -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <span class="product-status status-development">En Développement</span>
+                    <h3>Bibliothèque Virtuelle</h3>
+                    <p>Accès illimité à une vaste collection de ressources éducatives et littéraires numériques.</p>
+                    <ul class="product-features">
+                        <li>Milliers de livres et manuels</li>
+                        <li>Ressources académiques complètes</li>
+                        <li>Recherche intelligente</li>
+                        <li>Lecture hors ligne</li>
+                        <li>Recommandations personnalisées</li>
+                    </ul>
+                </div>
+
+                <!-- Contrôle Parental -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span class="product-status status-development">En Développement</span>
+                    <h3>Contrôle Parental</h3>
+                    <p>Application dédiée aux parents pour un suivi complet et sécurisé de l'apprentissage des enfants.</p>
+                    <ul class="product-features">
+                        <li>Suivi du temps d'apprentissage</li>
+                        <li>Progression par matière détaillée</li>
+                        <li>Rapports d'exercices et notes</li>
+                        <li>Alertes et notifications</li>
+                        <li>Limites de temps configurables</li>
+                    </ul>
+                </div>
+
+                <!-- FelisIA -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <span class="product-status status-development">En Développement</span>
+                    <h3>FelisIA</h3>
+                    <p>Système expert d'intelligence artificielle pour un enseignement personnalisé et approfondi.</p>
+                    <ul class="product-features">
+                        <li>Explications pédagogiques avancées</li>
+                        <li>Enseignant virtuel 24h/24</li>
+                        <li>Culture générale étendue</li>
+                        <li>Adaptation au style d'apprentissage</li>
+                        <li>Réponses contextuelles intelligentes</li>
+                    </ul>
+                    <div class="integration-badge">Intégré à Horizon Class</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="fonctionnalites" class="features">
+        <div class="container">
+            <h2 class="section-title">Pourquoi Choisir Horizon Class ?</h2>
+            <div class="features-grid">
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Apprentissage Personnalisé</h3>
+                    <p>Adapté au rythme et au niveau de chaque apprenant avec des parcours sur mesure.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Accessible Partout</h3>
+                    <p>Fonctionne même avec une connexion limitée, conçu pour les réalités locales.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Progression Mesurable</h3>
+                    <p>Tableaux de bord détaillés pour suivre l'évolution des compétences.</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Communauté Active</h3>
+                    <p>Échangez avec d'autres apprenants et enseignants passionnés.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="support">
+        <div class="container">
+            <h2 class="section-title">Support & Assistance</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: var(--gray);">
+                Notre équipe dédiée est là pour vous accompagner à chaque étape
+            </p>
+            <div class="support-options">
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>Support Immédiat</h3>
+                    <p>Contactez-nous via WhatsApp pour une assistance rapide</p>
+                    <a href="https://wa.me/242061173738" class="cta-button" style="margin-top: 1rem;">WhatsApp</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Professionnel</h3>
+                    <p>Envoyez-nous vos questions détaillées par email</p>
+                    <a href="mailto:info.horizoneducationtablet@gmail.com" class="cta-button" style="margin-top: 1rem;">Nous Écrire</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Documentation</h3>
+                    <p>Accédez à nos guides et ressources complètes</p>
+                    <a href="#contact" class="cta-button" style="margin-top: 1rem;">Consulter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Section -->
+    <section id="marketing" class="marketing">
+        <div class="container">
+            <h2>Rejoignez la Révolution Éducative</h2>
+            <p>Déjà des centaines d'apprenants nous font confiance à travers le Congo</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>Apprenants Actifs</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5+</h3>
+                    <p>Établissements Partenaires</p>
+                </div>
+                <div class="stat-item">
+                    <h3>95%</h3>
+                    <p>Taux de Satisfaction</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Support Disponible</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-Nous</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Adresse</h4>
+                            <p>35, rue Okonga, Q/Manianga<br>Talangaï, Brazzaville<br>République du Congo</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p>+242 06 117 37 38</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info.horizoneducationtablet@gmail.com</p>
+                            <p>rudennaggai@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Horaires</h4>
+                            <p>Lundi - Vendredi: 8h00 - 18h00</p>
+                            <p>Samedi: 9h00 - 13h00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/mjvnezbb" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nom Complet</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer le Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Horizon Education</div>
+                    <p>Transformer l'éducation grâce à l'innovation technologique. Ensemble, bâtissons l'avenir de l'apprentissage.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Liens Rapides</h4>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#apropos">À Propos</a></li>
+                        <li><a href="#produits">Produits</a></li>
+                        <li><a href="#support">Support</a></li>
+                        <li><a href="suppression-compte.html">Suppression de Compte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-Nous</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/16VjTARY4D/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/horizon-education-tablette/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.tiktok.com/@horizon.education.tablet?_r=1&_t=ZM-91AV69h3Jwy" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://whatsapp.com/channel/0029Vb7e0L8ADTOHKXIk4Z1A" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Horizon Education. Tous droits réservés. | Développé par Horizon Education - Section Ingénierie et Développement</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Floating Contact Buttons -->
+    <div class="floating-contact">
+        <button class="contact-btn whatsapp" onclick="window.open('https://wa.me/242061173738', '_blank')">
+            <i class="fab fa-whatsapp"></i>
+            <span class="contact-tooltip">WhatsApp</span>
+        </button>
+        <button class="contact-btn phone" onclick="window.open('tel:+242061173738', '_blank')">
+            <i class="fas fa-phone"></i>
+            <span class="contact-tooltip">Appeler</span>
+        </button>
+        <button class="contact-btn email" onclick="window.open('mailto:info.horizoneducationtablet@gmail.com', '_blank')">
+            <i class="fas fa-envelope"></i>
+            <span class="contact-tooltip">Email</span>
+        </button>
+    </div>
+
+    <script>
+        // Carousel Functionality
+        class Carousel {
+            constructor() {
+                this.slides = document.querySelectorAll('.carousel-slide');
+                this.indicators = document.querySelectorAll('.carousel-indicator');
+                this.prevBtn = document.querySelector('.carousel-prev');
+                this.nextBtn = document.querySelector('.carousel-next');
+                this.currentSlide = 0;
+                this.slideInterval = null;
+                this.slideDuration = 5000; // 5 seconds
+
+                this.init();
+            }
+
+            init() {
+                // Start auto-slide
+                this.startAutoSlide();
+
+                // Event listeners
+                this.prevBtn.addEventListener('click', () => this.prevSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+                // Indicator clicks
+                this.indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                // Pause on hover
+                const carousel = document.querySelector('.carousel');
+                carousel.addEventListener('mouseenter', () => this.stopAutoSlide());
+                carousel.addEventListener('mouseleave', () => this.startAutoSlide());
+
+                // Touch events for mobile
+                let startX = 0;
+                carousel.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    this.stopAutoSlide();
+                });
+
+                carousel.addEventListener('touchend', (e) => {
+                    const endX = e.changedTouches[0].clientX;
+                    const diff = startX - endX;
+
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                    }
+                    this.startAutoSlide();
+                });
+            }
+
+            showSlide(index) {
+                // Hide all slides
+                this.slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+
+                // Update indicators
+                this.indicators.forEach(indicator => {
+                    indicator.classList.remove('active');
+                });
+
+                // Show current slide
+                this.slides[index].classList.add('active');
+                this.indicators[index].classList.add('active');
+
+                this.currentSlide = index;
+            }
+
+            nextSlide() {
+                const next = (this.currentSlide + 1) % this.slides.length;
+                this.showSlide(next);
+            }
+
+            prevSlide() {
+                const prev = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                this.showSlide(prev);
+            }
+
+            goToSlide(index) {
+                this.showSlide(index);
+            }
+
+            startAutoSlide() {
+                this.stopAutoSlide();
+                this.slideInterval = setInterval(() => this.nextSlide(), this.slideDuration);
+            }
+
+            stopAutoSlide() {
+                if (this.slideInterval) {
+                    clearInterval(this.slideInterval);
+                    this.slideInterval = null;
+                }
+            }
+        }
+
+        // Initialize carousel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new Carousel();
+        });
+
+        // Navigation Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            const scrollToTop = document.getElementById('scrollToTop');
+            
+            if (window.scrollY > 100) {
+                header.classList.add('nav-scrolled');
+                scrollToTop.style.display = 'flex';
+            } else {
+                header.classList.remove('nav-scrolled');
+                scrollToTop.style.display = 'none';
+            }
+
+            // Active Navigation Highlighting
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll to Top
+        document.getElementById('scrollToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Fade-in Animation on Scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+
+        // Contact Form Handling with Formspree
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Send to Formspree
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
+                    this.reset();
+                } else {
+                    alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.');
+                }
+            })
+            .catch(error => {
+                alert('Erreur de connexion. Veuillez réessayer.');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+
+        // Hero Section Scroll Effect
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            const heroHeight = hero.offsetHeight;
+            
+            if (scrolled > heroHeight * 0.5) {
+                const opacity = 1 - (scrolled - heroHeight * 0.5) / (heroHeight * 0.5);
+                hero.style.opacity = Math.max(opacity, 0);
+            } else {
+                hero.style.opacity = 1;
+            }
+        });
+    </script>
+</body>
+</html>
